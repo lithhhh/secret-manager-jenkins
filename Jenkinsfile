@@ -1,7 +1,7 @@
 pipeline {
   agent any
   parameters {
-    teste = string(name: 'param1', defaultValue: 'default', description: 'Param 1 description')
+    string(name: 'param1', defaultValue: 'default', description: 'Param 1 description')
     booleanParam(name: 'param2', defaultValue: true, description: 'Param 2 description')
     choice(name: 'param3', choices: ['option1', 'option2', 'option3'], description: 'Param 3 description')
   }
