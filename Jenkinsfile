@@ -1,6 +1,5 @@
 import groovy.json.JsonBuilder
 
-def secret_config = new JsonBuilder()
 
 
 pipeline {
@@ -14,7 +13,10 @@ pipeline {
     stage('Stage 1') {
       steps {
         script {
-            secret_config.name = input message: 'Digite seu nome', parameters: [string(defaultValue: '', description: 'Nome do usuário', name: 'name')]
+            def secret_config = new JsonBuilder()
+
+            secret_config.name = input messa
+            ge: 'Digite seu nome', parameters: [string(defaultValue: '', description: 'Nome do usuário', name: 'name')]
             echo "Olá, ${secret_config.name}!"
             echo secret_config.toString()
         }
