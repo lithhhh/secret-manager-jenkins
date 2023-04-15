@@ -15,8 +15,7 @@ pipeline {
         script {
             def secret_config = new JsonBuilder()
 
-            secret_config.name = input messa
-            ge: 'Digite seu nome', parameters: [string(defaultValue: '', description: 'Nome do usuário', name: 'name')]
+            secret_config.name = input message: 'Digite seu nome', parameters: [string(defaultValue: '', description: 'Nome do usuário', name: 'name')]
             echo "Olá, ${secret_config.name}!"
             echo secret_config.toString()
         }
