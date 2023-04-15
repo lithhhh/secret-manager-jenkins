@@ -12,7 +12,7 @@ pipeline {
             secret_config = readJSON text: '{}'
             secret_config.name = input message: 'Digite seu nome', parameters: [string(defaultValue: '', description: 'Nome do usuário', name: 'name')]
             echo "Olá, ${params.name}!"
-            echo secret_secret_config
+            echo secret_config
         }
       }
     }
