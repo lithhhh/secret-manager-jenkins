@@ -10,8 +10,9 @@ pipeline {
       steps {
         script {
             secret_config = readJSON text: '{}'
-            echo "defina o nome de seu segredo"
-            secret_config.name = input message: "qual será o noem do segredo?", ok: 'boua!'
+            secret_config.name = input message: 'Digite seu nome', parameters: [string(defaultValue: '', description: 'Nome do usuário', name: 'name')]
+            echo "Olá, ${params.name}!"
+            echo secret_secret_config
         }
       }
     }
