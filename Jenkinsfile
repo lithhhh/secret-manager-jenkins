@@ -1,3 +1,8 @@
+import groovy.json.JsonBuilder
+
+def secret_config = new JsonBuilder()
+
+
 pipeline {
   agent any
   parameters {
@@ -9,10 +14,9 @@ pipeline {
     stage('Stage 1') {
       steps {
         script {
-            secret_config = readJSON text: '{}'
             secret_config.name = input message: 'Digite seu nome', parameters: [string(defaultValue: '', description: 'Nome do usuário', name: 'name')]
-            echo "Olá, ${params.name}!"
-            echo secret_config
+            echo "Olá, ${secret_config.name}!"
+            echo secret_config.toString()
         }
       }
     }
