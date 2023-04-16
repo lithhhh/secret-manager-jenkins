@@ -13,7 +13,7 @@ pipeline {
 
             secret_config["name"] = input message: 'Digite seu nome', parameters: [string(defaultValue: '', description: 'Nome do usuário', name: 'name')]
             echo "Olá, ${secret_config["name"]}!"
-            echo secret_config
+            echo "${secret_config}"
         }
       }
     }
