@@ -1,10 +1,5 @@
 pipeline {
   agent any
-  parameters {
-    string(name: 'param1', defaultValue: 'default', description: 'Param 1 description')
-    booleanParam(name: 'param2', defaultValue: true, description: 'Param 2 description')
-    choice(name: 'param3', choices: ['option1', 'option2', 'option3'], description: 'Param 3 description')
-  }
   stages {
     stage('Stage 1') {
       steps {
@@ -17,10 +12,17 @@ pipeline {
             echo "o seu username será: ${secret_config["username"]}!"
             secret_config["password"] = input message: 'Digite o nome do password:', parameters: [string(defaultValue: '', description: 'password', name: 'password')]
             echo "o seu password será: ${secret_config["password"]}!"
-
-            echo "${secret_config}"
         }
       }
     }
+
+    stage('Stage 2') {
+      steps {
+        script {
+          echo "${secret_config}"
+          sh "docker pull terraform:latest"
+        }
+      }
+    } 
   }
 }
