@@ -1,7 +1,7 @@
 def secret_config = [:]
 
 pipeline {
-  agent 'docker'
+  agent any
   stages {
     stage('Stage 1') {
       steps {
