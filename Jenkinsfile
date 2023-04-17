@@ -1,7 +1,7 @@
 def secret_config = [:]
 
 pipeline {
-  agent any
+  agent 'docker'
   stages {
     stage('Stage 1') {
       steps {
@@ -20,7 +20,7 @@ pipeline {
       steps {
         script {
           echo "${secret_config}"
-          sh "docker pull terraform:latest"
+          docker.run('hello-world')
         }
       }
     } 
