@@ -3,7 +3,7 @@ def secret_config = [:]
 pipeline {
   agent any
   stages {
-    stage('get params') {
+    stage('Stage 1') {
       steps {
         script {
             secret_config["name"] = input message: 'Digite o nome do segredo:', parameters: [string(defaultValue: '', description: 'Nome da secret', name: 'name')]
@@ -16,30 +16,11 @@ pipeline {
       }
     }
 
-    stage('Install Docker') {
-      steps {
-          sh '''
-              # Install Docker
-              apt-get update
-              apt-get install -y apt-transport-https ca-certificates curl gnupg lsb-release
-              curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-              echo \
-                "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
-                $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-              apt-get update
-              apt-get install -y docker-ce docker-ce-cli containerd.io
-              # Add the current user to the docker group so you can execute Docker without sudo
-              sudo usermod -aG docker $USER
-          '''
-      }
-  }
-
-
-    stage('Stage 3') {
+    stage('Stage 2') {
       steps {
         script {
           echo "${secret_config}"
-          sh 'docker --version'
+          sh "docker pull terraform:latest"
         }
       }
     } 
