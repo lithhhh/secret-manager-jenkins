@@ -1,16 +1,12 @@
-def secret_config = [:]
-
 pipeline {
-  agent any
-  stages {
-
-    stage('Stage 2') {
-      steps {
-        script {
-          echo "${secret_config}"
-          sh "docker pull terraform:latest"
+    agent {
+        docker { image 'node:16.13.1-alpine' }
+    }
+    stages {
+        stage('Test') {
+            steps {
+                sh 'node --version'
+            }
         }
-      }
-    } 
-  }
+    }
 }
